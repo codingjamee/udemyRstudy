@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./NewUser.module.css";
 import UserInput from "./userInput";
 
 const NewUser = props => {

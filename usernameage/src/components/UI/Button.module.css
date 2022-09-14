@@ -1,0 +1,7 @@
+.button {
+  border-radius: 3px;
+  font-weight: bold;
+  font: inherit;
+  background-color: rgba(0, 66, 255, 1);
+  color:aliceblue
+}
