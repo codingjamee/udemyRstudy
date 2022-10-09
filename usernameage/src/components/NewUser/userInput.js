@@ -11,13 +11,7 @@ const UserInput = props => {
 
   const submitHandler = e => {
     e.preventDefault();
-    const enteredUserName = nameInputRef.current.value;
-    const enteredUserAge = ageInputRef.current.value;
 
-    if (
-      enteredUserName.trim().length === 0 ||
-      enteredUserAge.trim().length === 0
-    ) {
       setError({
         title: "Invalid input",
         message: "Please enter a valid name and age (non-empty values).",
@@ -34,7 +28,7 @@ const UserInput = props => {
 
     const userData = {
       id: Math.random().toString(),
-      name: enteredUserName,
+      name: enteredName,
       age: enteredUserAge,
     };
     props.onSaveUserData(userData);
