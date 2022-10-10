@@ -7,12 +7,16 @@ import CartProvier from "./store/CartProvider";
 function App() {
   const [open, setOpen] = useState(false);
 
-  const onClickOpen = receivedState => {
-    setOpen(receivedState);
+  const onClickOpen = () => {
+    setOpen(true);
+  };
+
+  const onClickClose = () => {
+    setOpen(false);
   };
   return (
     <CartProvier>
-      {open && <Cart onClickOpen={onClickOpen} />}
+      {open && <Cart onClickClose={onClickClose} />}
       <Header onClickOpen={onClickOpen} />
       <main>
         <Meals />

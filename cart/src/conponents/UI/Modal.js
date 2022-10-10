@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 
 const Backdrop = props => {
   const onClickBack = () => {
-    props.onClickOpen(false);
+    props.onClickClose();
   };
   return <div className={classes.backdrop} onClick={onClickBack}></div>;
 };
@@ -21,7 +21,7 @@ const Modal = props => {
   return (
     <>
       {ReactDOM.createPortal(
-        <Backdrop onClickOpen={props.onClickOpen} />,
+        <Backdrop onClickClose={props.onClickClose} />,
         document.getElementById("overlays")
       )}
       {ReactDOM.createPortal(
