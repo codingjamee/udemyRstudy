@@ -13,7 +13,7 @@ const ProductItem = props => {
         title,
         price,
         description,
-      })
+      }) 
     );
   };
   const { title, id, price, description } = props;
