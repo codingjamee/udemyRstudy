@@ -1,7 +1,8 @@
-import { useLoaderData } from 'react-router-dom';
+import { Suspense } from "react";
+import { useLoaderData, defer, Await } from "react-router-dom";
 
-import Posts from '../components/Posts';
-import { getSlowPosts } from '../util/api';
+import Posts from "../components/Posts";
+import { getSlowPosts } from "../util/api";
 
 function DeferredBlogPostsPage() {
   const loaderData = useLoaderData();
@@ -9,7 +10,14 @@ function DeferredBlogPostsPage() {
   return (
     <>
       <h1>Our Blog Posts</h1>
-      <Posts blogPosts={loaderData} />
+      <Suspense fallback={<p>loading...</p>}>
+        <Await
+          resolve={loaderData.posts}
+          errorElement={<p>Error loading blog Posts.</p>}
+        >
+          {(loadedPosts) => <Posts blogPosts={loadedPosts} />}
+        </Await>
+      </Suspense>
     </>
   );
 }
@@ -17,5 +25,5 @@ function DeferredBlogPostsPage() {
 export default DeferredBlogPostsPage;
 
 export async function loader() {
-  return getSlowPosts();
+  return defer({ posts: getSlowPosts() });
 }

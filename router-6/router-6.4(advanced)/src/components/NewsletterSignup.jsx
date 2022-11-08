@@ -1,7 +1,7 @@
-import { useRef } from 'react';
-import { useFetcher } from 'react-router-dom';
+import { useRef } from "react";
+import { useFetcher } from "react-router-dom";
 
-import classes from './NewsletterSignup.module.css';
+import classes from "./NewsletterSignup.module.css";
 
 function NewsletterSignup() {
   const emailEl = useRef();
@@ -14,14 +14,14 @@ function NewsletterSignup() {
     fetcher.submit(
       // better: use fetcher.Form instead
       { email: enteredEmail },
-      { method: 'post', action: '/newsletter' }
+      { method: "post", action: "/newsletter" }
     );
   }
 
   return (
     <section className={classes.newsletter}>
       <h2>Sign up for our weekly newsletter</h2>
-      <form onSubmit={signupForNewsletterHandler}>
+      <fetcher.Form onSubmit={signupForNewsletterHandler}>
         <input
           ref={emailEl}
           id="email"
@@ -30,7 +30,7 @@ function NewsletterSignup() {
           aria-label="Your email address."
         />
         <button>Sign Up</button>
-      </form>
+      </fetcher.Form>
     </section>
   );
 }
