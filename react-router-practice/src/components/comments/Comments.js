@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
+
+import classes from "./Comments.module.css";
+import NewCommentForm from "./NewCommentForm";
 import useHttp from "../../hooks/use-http";
 import { getAllComments } from "../../lib/api";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import CommentsList from "./CommentsList";
-
-import classes from "./Comments.module.css";
-import NewCommentForm from "./NewCommentForm";
 
 const Comments = () => {
   const [isAddingComment, setIsAddingComment] = useState(false);
@@ -14,12 +14,7 @@ const Comments = () => {
 
   const { quoteId } = params;
 
-  const {
-    sendRequest,
-    status,
-    data: loadedComments,
-    error,
-  } = useHttp(getAllComments);
+  const { sendRequest, status, data: loadedComments } = useHttp(getAllComments);
 
   useEffect(() => {
     sendRequest(quoteId);
@@ -31,7 +26,8 @@ const Comments = () => {
 
   const addedCommentHandler = useCallback(() => {
     sendRequest(quoteId);
-  }, [quoteId, sendRequest]);
+  }, [sendRequest, quoteId]);
+
   let comments;
 
   if (status === "pending") {
@@ -50,15 +46,15 @@ const Comments = () => {
     status === "completed" &&
     (!loadedComments || loadedComments.length === 0)
   ) {
-    comments = <p className="centered">No Comments were added yet!</p>;
+    comments = <p className="centered">No comments were added yet!</p>;
   }
 
   return (
     <section className={classes.comments}>
-      <h2>User Comments</h2>
+      <h2>댓글 보기</h2>
       {!isAddingComment && (
         <button className="btn" onClick={startAddCommentHandler}>
-          Add a Comment
+          댓글 쓰기
         </button>
       )}
       {isAddingComment && (

@@ -1,14 +1,15 @@
-import { useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useRef, useEffect } from "react";
 
 import useHttp from "../../hooks/use-http";
 import { addComment } from "../../lib/api";
-import classes from "./NewCommentForm.module.css";
 import LoadingSpinner from "../UI/LoadingSpinner";
+import classes from "./NewCommentForm.module.css";
 
 const NewCommentForm = (props) => {
   const commentTextRef = useRef();
+
   const { sendRequest, status, error } = useHttp(addComment);
+
   const { onAddedComment } = props;
 
   useEffect(() => {
@@ -16,11 +17,13 @@ const NewCommentForm = (props) => {
       onAddedComment();
     }
   }, [status, error, onAddedComment]);
+
   const submitFormHandler = (event) => {
     event.preventDefault();
 
-    // optional: Could validate here
     const enteredText = commentTextRef.current.value;
+
+    // optional: Could validate here
 
     sendRequest({ commentData: { text: enteredText }, quoteId: props.quoteId });
   };
@@ -33,11 +36,11 @@ const NewCommentForm = (props) => {
         </div>
       )}
       <div className={classes.control} onSubmit={submitFormHandler}>
-        <label htmlFor="comment">Your Comment</label>
+        <label htmlFor="comment">댓글 입력창</label>
         <textarea id="comment" rows="5" ref={commentTextRef}></textarea>
       </div>
       <div className={classes.actions}>
-        <button className="btn">Add Comment</button>
+        <button className="btn">댓글 추가버튼</button>
       </div>
     </form>
   );
