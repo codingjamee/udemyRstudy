@@ -16,5 +16,8 @@
   "devDependencies": {
     "postcss": "^8.4.19",
     "resolve-url-loader": "^5.0.0"
+  },
+  "engines": {
+    "node": "14.12.1"
   }
 }
