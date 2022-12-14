@@ -24,7 +24,7 @@ const MainNavigtion = () => {
               </span>
             </Link>
           </li>
-        </ul>
+        </ul>code
       </nav>
     </header>
   );
